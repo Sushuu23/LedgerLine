@@ -1,100 +1,144 @@
 
+/* =====================================
+   1. GLOBAL STYLES
+===================================== */
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-body {
-  font-family: Arial, sans-serif;
-  background: #f3f6fa;
+html,
+body,
+#root {
+  width: 100%;
+  min-height: 100%;
+  margin: 0;
+  padding: 0;
+  border: none;
+  outline: none;
 }
 
+body {
+  font-family: "Segoe UI", Arial, sans-serif;
+  background: #f5f7fb;
+  color: #172b4d;
+  overflow-x: hidden;
+}
+
+#root {
+  max-width: none;
+}
+
+button,
+input,
+select {
+  font-family: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+/* =====================================
+   2. LOGIN PAGE
+===================================== */
+
 .login-page {
+  width: 100%;
   min-height: 100vh;
   display: flex;
-  justify-content: center;
   align-items: center;
-  padding: 20px;
+  justify-content: center;
+  margin: 0;
+  padding: 25px;
+  border: none;
+  outline: none;
+  background: #f3f6fb;
 }
 
 .login-card {
   width: 100%;
-  max-width: 420px;
-  background: white;
+  max-width: 430px;
   padding: 40px;
-  border-radius: 16px;
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
-  text-align: center;
+  background: #ffffff;
+  border: 1px solid #e5eaf1;
+  border-radius: 14px;
+  box-shadow: 0 10px 35px rgba(20, 40, 75, 0.08);
 }
 
 .brand-icon {
-  width: 55px;
-  height: 55px;
-  background: #123b70;
-  color: white;
-  border-radius: 14px;
+  width: 52px;
+  height: 52px;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 30px;
-  font-weight: bold;
-  margin: 0 auto 12px;
+  margin-bottom: 18px;
+  background: #173b70;
+  color: white;
+  border-radius: 12px;
+  font-size: 27px;
+  font-weight: 700;
 }
 
-h1 {
-  color: #123b70;
+.login-card h1 {
   font-size: 28px;
-  margin-bottom: 8px;
+  color: #173b70;
 }
 
 .tagline {
-  color: #778397;
-  font-size: 13px;
+  margin-top: 7px;
   margin-bottom: 32px;
+  color: #718096;
+  font-size: 13px;
 }
 
-h2 {
-  color: #1d2939;
-  font-size: 23px;
+.login-card h2 {
   margin-bottom: 8px;
+  font-size: 21px;
+  color: #172b4d;
 }
 
 .subtitle {
-  color: #7b8494;
-  font-size: 14px;
   margin-bottom: 25px;
+  color: #718096;
+  font-size: 13px;
 }
 
-form {
-  text-align: left;
+.login-card form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
 }
 
-label {
-  display: block;
-  color: #344054;
+.login-card label {
+  margin-top: 8px;
+  color: #344563;
   font-size: 14px;
-  font-weight: bold;
-  margin-bottom: 8px;
+  font-weight: 600;
 }
 
-input {
+.login-card input {
   width: 100%;
   padding: 13px;
-  border: 1px solid #d0d5dd;
-  border-radius: 8px;
+  border: 1px solid #dce3ec;
+  border-radius: 7px;
+  background: #ffffff;
+  color: #172b4d;
   font-size: 14px;
-  outline: none;
-  margin-bottom: 20px;
 }
 
-input:focus {
-  border-color: #2563eb;
-  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+.login-card input:focus {
+  outline: none;
+  border-color: #2457a7;
+  box-shadow: 0 0 0 3px rgba(36, 87, 167, 0.1);
 }
 
 .password-box {
   position: relative;
+  display: flex;
+  align-items: center;
 }
 
 .password-box input {
@@ -103,39 +147,1094 @@ input:focus {
 
 .show-password {
   position: absolute;
-  right: 10px;
-  top: 12px;
+  right: 12px;
   border: none;
   background: transparent;
-  color: #2563eb;
-  cursor: pointer;
+  color: #2457a7;
+  font-size: 12px;
+  font-weight: 600;
 }
 
 .login-button {
   width: 100%;
+  margin-top: 15px;
   padding: 14px;
   border: none;
-  border-radius: 8px;
-  background: #123b70;
+  border-radius: 7px;
+  background: #173b70;
   color: white;
-  font-size: 16px;
-  font-weight: bold;
-  cursor: pointer;
+  font-size: 15px;
+  font-weight: 600;
   transition: background 0.2s;
 }
 
 .login-button:hover {
-  background: #0b2b54;
+  background: #2457a7;
+}
+
+.login-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.login-message {
+  margin-top: 15px;
+  color: #c0392b;
+  font-size: 13px;
+  line-height: 1.5;
 }
 
 .security-note {
-  color: #8993a4;
+  margin-top: 28px;
+  text-align: center;
+  color: #8592a6;
   font-size: 12px;
-  margin-top: 24px;
 }
 
-@media (max-width: 480px) {
-  .login-card {
-    padding: 28px 22px;
+/* =====================================
+   3. DASHBOARD LAYOUT
+===================================== */
+
+.dashboard-layout {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  background: #f5f7fb;
+}
+
+/* =====================================
+   4. SIDEBAR
+===================================== */
+
+.sidebar {
+  width: 250px;
+  min-width: 250px;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  padding: 25px 17px;
+  background: #142c4e;
+  color: white;
+}
+
+.sidebar-brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 45px;
+  padding: 0 8px;
+  font-size: 21px;
+  font-weight: 700;
+}
+
+.sidebar-logo {
+  width: 38px;
+  height: 38px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 9px;
+  background: #ffffff;
+  color: #173b70;
+  font-size: 21px;
+}
+
+.nav-heading {
+  margin: 12px 10px;
+  color: #9aabc2;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1.3px;
+}
+
+.sidebar-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.nav-link {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  padding: 12px 13px;
+  border: none;
+  border-radius: 7px;
+  background: transparent;
+  color: #d4deeb;
+  text-align: left;
+  font-size: 14px;
+  transition: 0.2s;
+}
+
+.nav-link:hover {
+  background: #203e66;
+  color: #ffffff;
+}
+
+.nav-link.active {
+  background: #ffffff;
+  color: #173b70;
+  font-weight: 700;
+}
+
+.nav-symbol {
+  width: 20px;
+  font-size: 18px;
+  text-align: center;
+}
+
+.sidebar-bottom {
+  margin-top: auto;
+}
+
+.profile-mini {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 25px;
+  padding: 14px 7px;
+  border-top: 1px solid #38506f;
+}
+
+.profile-avatar,
+.topbar-avatar {
+  width: 37px;
+  height: 37px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  border-radius: 50%;
+  background: #dce8f7;
+  color: #173b70;
+  font-weight: 700;
+}
+
+.profile-mini-info {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.profile-mini-info strong {
+  font-size: 12px;
+  color: white;
+}
+
+.profile-mini-info span {
+  overflow: hidden;
+  color: #b7c6d9;
+  font-size: 10px;
+  text-overflow: ellipsis;
+}
+
+/* =====================================
+   5. MAIN CONTENT
+===================================== */
+
+.dashboard-main {
+  min-width: 0;
+  flex: 1;
+}
+
+.topbar {
+  min-height: 85px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 18px 35px;
+  background: #ffffff;
+  border-bottom: 1px solid #e7ebf1;
+}
+
+.topbar h2 {
+  font-size: 21px;
+  color: #172b4d;
+}
+
+.topbar p {
+  margin-top: 5px;
+  color: #8793a5;
+  font-size: 12px;
+}
+
+.topbar-right {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.secure-label {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  color: #52647d;
+  font-size: 12px;
+}
+
+.status-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #24a36b;
+}
+
+.dashboard-content {
+  width: 100%;
+  max-width: 1500px;
+  margin: auto;
+  padding: 32px 35px;
+}
+
+/* =====================================
+   6. PAGE HEADING
+===================================== */
+
+.page-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 23px;
+}
+
+.page-heading h1 {
+  font-size: 24px;
+  color: #172b4d;
+}
+
+.page-heading p {
+  margin-top: 7px;
+  color: #7c899c;
+  font-size: 13px;
+}
+
+/* =====================================
+   7. BALANCE CARD
+===================================== */
+
+.balance-card {
+  min-height: 190px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 30px 35px;
+  border-radius: 12px;
+  background: #173b70;
+  color: white;
+  box-shadow: 0 8px 20px rgba(23, 59, 112, 0.12);
+}
+
+.balance-label {
+  color: #c2d3e9;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1.2px;
+}
+
+.balance-card h2 {
+  margin-top: 15px;
+  font-size: 34px;
+  font-weight: 700;
+}
+
+.balance-card p {
+  margin-top: 10px;
+  color: #c2d3e9;
+  font-size: 12px;
+}
+
+.balance-symbol {
+  width: 75px;
+  height: 75px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  border-radius: 50%;
+  color: white;
+  font-size: 37px;
+}
+
+/* =====================================
+   8. QUICK ACTIONS
+===================================== */
+
+.quick-actions {
+  margin-top: 35px;
+}
+
+.section-title {
+  margin-bottom: 17px;
+}
+
+.section-title h2,
+.section-heading h2 {
+  font-size: 18px;
+  color: #172b4d;
+}
+
+.section-title p,
+.section-heading p {
+  margin-top: 6px;
+  color: #8793a5;
+  font-size: 12px;
+}
+
+.action-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.action-card {
+  min-height: 145px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 9px;
+  padding: 19px;
+  border: 1px solid #e5eaf1;
+  border-radius: 10px;
+  background: #ffffff;
+  text-align: left;
+  transition: 0.2s;
+}
+
+.action-card:hover {
+  border-color: #9eb8dc;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(30, 55, 90, 0.06);
+}
+
+.action-icon {
+  width: 34px;
+  height: 34px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  background: #eaf1fb;
+  color: #2457a7;
+  font-size: 21px;
+}
+
+.action-card strong {
+  color: #263d5b;
+  font-size: 14px;
+}
+
+.action-card small {
+  color: #8793a5;
+  font-size: 11px;
+}
+
+/* =====================================
+   9. ACCOUNTS SECTION
+===================================== */
+
+.accounts-section {
+  margin-top: 35px;
+  padding: 25px;
+  border: 1px solid #e6eaf0;
+  border-radius: 11px;
+  background: #ffffff;
+}
+
+.section-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+  margin-bottom: 22px;
+}
+
+.primary-button {
+  padding: 11px 18px;
+  border: none;
+  border-radius: 7px;
+  background: #173b70;
+  color: white;
+  font-size: 13px;
+  font-weight: 600;
+  transition: background 0.2s;
+}
+
+.primary-button:hover {
+  background: #2457a7;
+}
+
+.primary-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.accounts-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.account-card {
+  min-width: 0;
+  padding: 23px;
+  border: 1px solid #e5eaf1;
+  border-radius: 10px;
+  background: #ffffff;
+}
+
+.account-card-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.account-icon {
+  color: #2457a7;
+  font-size: 22px;
+}
+
+.account-status {
+  padding: 5px 10px;
+  border-radius: 20px;
+  background: #e8f6ef;
+  color: #208452;
+  font-size: 10px;
+  font-weight: 700;
+}
+
+.account-card h3 {
+  margin-top: 17px;
+  margin-bottom: 17px;
+  color: #263d5b;
+  font-size: 16px;
+}
+
+.account-label {
+  margin-bottom: 7px;
+  color: #8793a5;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.7px;
+}
+
+.account-number {
+  display: block;
+  overflow-wrap: anywhere;
+  color: #344563;
+  font-size: 14px;
+}
+
+.account-divider {
+  height: 1px;
+  margin: 20px 0;
+  background: #edf0f4;
+}
+
+.account-card h2 {
+  color: #173b70;
+  font-size: 22px;
+}
+
+/* =====================================
+   10. PAYMENT FORM
+===================================== */
+
+.payment-form-card {
+  width: 100%;
+  max-width: 600px;
+  margin-top: 25px;
+  padding: 30px;
+  border: 1px solid #e5eaf1;
+  border-radius: 12px;
+  background: #ffffff;
+}
+
+.payment-form-card h3 {
+  margin-bottom: 10px;
+  color: #172b4d;
+  font-size: 19px;
+}
+
+.profile-description {
+  margin-top: 10px;
+  color: #8793a5;
+  font-size: 13px;
+  line-height: 1.7;
+}
+
+.payment-form-card form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 25px;
+}
+
+.payment-form-card label {
+  margin-top: 8px;
+  color: #344563;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.payment-form-card input,
+.payment-form-card select {
+  width: 100%;
+  min-height: 45px;
+  padding: 12px 13px;
+  border: 1px solid #d5dce5;
+  border-radius: 7px;
+  background: #ffffff;
+  color: #172b4d;
+  font-size: 14px;
+}
+
+.payment-form-card input:focus,
+.payment-form-card select:focus {
+  outline: none;
+  border-color: #2457a7;
+  box-shadow: 0 0 0 3px rgba(36, 87, 167, 0.1);
+}
+
+.payment-form-card .primary-button {
+  margin-top: 12px;
+  padding: 13px 20px;
+}
+
+.payment-form-card .primary-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* =====================================
+   11. DEPOSIT / WITHDRAW TABS
+===================================== */
+
+.payment-tabs {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 25px;
+  border-bottom: 1px solid #e5eaf1;
+}
+
+.payment-tab {
+  padding: 12px 20px;
+  border: none;
+  border-bottom: 3px solid transparent;
+  background: transparent;
+  color: #718096;
+  font-size: 14px;
+  font-weight: 600;
+  transition: 0.2s;
+}
+
+.payment-tab:hover {
+  color: #173b70;
+}
+
+.payment-tab.selected {
+  border-bottom-color: #173b70;
+  color: #173b70;
+}
+
+/* =====================================
+   12. PROFILE SECTION
+===================================== */
+
+.profile-section {
+  max-width: 750px;
+}
+
+.profile-large-avatar {
+  width: 75px;
+  height: 75px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 25px 0;
+  border-radius: 50%;
+  background: #e5eefb;
+  color: #173b70;
+  font-size: 30px;
+  font-weight: 700;
+}
+
+.profile-detail {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  padding: 17px 0;
+  border-bottom: 1px solid #edf0f4;
+}
+
+.profile-detail span {
+  color: #8793a5;
+  font-size: 12px;
+}
+
+.profile-detail strong {
+  overflow-wrap: anywhere;
+  color: #263d5b;
+  font-size: 14px;
+}
+
+/* =====================================
+   13. MESSAGES
+===================================== */
+
+.empty-message {
+  padding: 20px 0;
+  color: #8793a5;
+  font-size: 13px;
+}
+
+.dashboard-message {
+  margin-top: 20px;
+  padding: 13px 16px;
+  border: 1px solid #dce8f7;
+  border-radius: 7px;
+  background: #edf4ff;
+  color: #173b70;
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+/* =====================================
+   14. FOOTER
+===================================== */
+
+.dashboard-footer {
+  margin-top: 40px;
+  padding: 20px 0;
+  border-top: 1px solid #e5eaf1;
+  color: #9aa5b5;
+  text-align: center;
+  font-size: 11px;
+}
+
+/* =====================================
+   15. RESPONSIVE DESIGN
+===================================== */
+
+@media (max-width: 1100px) {
+  .action-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 800px) {
+  .sidebar {
+    width: 210px;
+    min-width: 210px;
+    padding: 20px 12px;
+  }
+
+  .dashboard-content {
+    padding: 25px 20px;
+  }
+
+  .topbar {
+    padding: 17px 20px;
+  }
+
+  .accounts-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 600px) {
+  .dashboard-layout {
+    flex-direction: column;
+  }
+
+  .sidebar {
+    width: 100%;
+    min-width: 0;
+    min-height: auto;
+    padding: 15px;
+  }
+
+  .sidebar-brand {
+    margin-bottom: 15px;
+  }
+
+  .sidebar-nav {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .sidebar-bottom {
+    margin-top: 15px;
+  }
+
+  .sidebar-bottom .profile-mini {
+    display: none;
+  }
+
+  .nav-heading {
+    margin-top: 10px;
+  }
+
+  .topbar {
+    min-height: 70px;
+    padding: 15px;
+  }
+
+  .topbar h2 {
+    font-size: 18px;
+  }
+
+  .secure-label {
+    display: none;
+  }
+
+  .dashboard-content {
+    padding: 20px 14px;
+  }
+
+  .balance-card {
+    min-height: 160px;
+    padding: 23px;
+  }
+
+  .balance-card h2 {
+    font-size: 27px;
+  }
+
+  .balance-symbol {
+    width: 55px;
+    height: 55px;
+    font-size: 27px;
+  }
+
+  .action-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+
+  .action-card {
+    min-height: 130px;
+    padding: 13px;
+  }
+
+  .accounts-section {
+    padding: 17px;
+  }
+
+  .section-heading {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .payment-form-card {
+    padding: 20px;
+  }
+}
+
+@media (max-width: 380px) {
+  .action-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .payment-tab {
+    padding: 11px 14px;
+  }
+}
+
+/* =========================================
+   LEDGERLINE - PROFILE POLISH
+========================================= */
+
+.profile-card {
+  padding: 28px;
+  background: #ffffff;
+  border: 1px solid #e5eaf1;
+  border-radius: 14px;
+  box-shadow: 0 5px 20px rgba(20, 40, 75, 0.04);
+}
+
+.profile-header {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid #edf0f4;
+}
+
+.profile-avatar.large {
+  width: 68px;
+  height: 68px;
+  font-size: 25px;
+  background: #eaf1fb;
+}
+
+.profile-header h2 {
+  margin-bottom: 5px;
+  color: #173b70;
+  font-size: 22px;
+}
+
+.profile-header p {
+  margin-bottom: 10px;
+  color: #718096;
+  font-size: 13px;
+  overflow-wrap: anywhere;
+}
+
+.profile-details {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0 25px;
+  margin-top: 20px;
+}
+
+.profile-details > div {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  min-width: 0;
+  padding: 15px 0;
+  border-bottom: 1px solid #edf0f4;
+}
+
+.profile-details span {
+  color: #8793a5;
+  font-size: 12px;
+}
+
+.profile-details strong {
+  color: #263d5b;
+  font-size: 14px;
+  overflow-wrap: anywhere;
+}
+
+.profile-form-section {
+  margin-top: 26px;
+  padding: 22px;
+  background: #f8fafd;
+  border: 1px solid #e9eef5;
+  border-radius: 11px;
+}
+
+.profile-form-section h3 {
+  margin-bottom: 17px;
+  color: #173b70;
+  font-size: 17px;
+}
+
+.profile-form-section label {
+  display: block;
+  margin: 12px 0 8px;
+  color: #52647d;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.profile-form-section input,
+.profile-form-section select {
+  width: 100%;
+  max-width: 430px;
+  min-height: 43px;
+  padding: 10px 12px;
+  border: 1px solid #dce3ec;
+  border-radius: 7px;
+  background: #ffffff;
+  color: #172b4d;
+  font-size: 14px;
+}
+
+.profile-form-section form {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.profile-form-section .primary-button {
+  margin-top: 8px;
+}
+
+.profile-form-section > div[style] {
+  max-width: 520px;
+  margin: 24px auto 0;
+  border: 1px solid #e5eaf1;
+}
+
+.profile-form-section > div[style] > div {
+  box-shadow: 0 4px 15px rgba(20, 40, 75, 0.06);
+}
+
+/* =========================================
+   LEDGERLINE - ANALYTICS POLISH
+========================================= */
+
+.analytics-summary-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 17px;
+  margin-top: 25px;
+}
+
+.analytics-card {
+  min-width: 0;
+  padding: 23px;
+  background: #ffffff;
+  border: 1px solid #e7ebf1;
+  border-radius: 12px;
+  box-shadow: 0 4px 16px rgba(20, 40, 75, 0.035);
+  transition: transform 0.22s ease, box-shadow 0.22s ease;
+}
+
+.analytics-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 9px 22px rgba(20, 40, 75, 0.07);
+}
+
+.analytics-summary-grid .analytics-card {
+  border-top: 3px solid #2457a7;
+}
+
+.analytics-summary-grid .analytics-card:nth-child(2) {
+  border-top-color: #208452;
+}
+
+.analytics-summary-grid .analytics-card:nth-child(3) {
+  border-top-color: #d9534f;
+}
+
+.analytics-summary-grid .analytics-card:nth-child(4) {
+  border-top-color: #8b5cf6;
+}
+
+.analytics-card > span {
+  color: #718096;
+  font-size: 13px;
+}
+
+.analytics-card h2 {
+  margin: 13px 0 8px;
+  color: #173b70;
+  font-size: 24px;
+  overflow-wrap: anywhere;
+}
+
+.analytics-card small {
+  color: #8793a5;
+  font-size: 11px;
+}
+
+.analytics-card h3 {
+  color: #173b70;
+  font-size: 17px;
+}
+
+.analytics-card .profile-description {
+  margin-top: 8px;
+  font-size: 12px;
+}
+
+/* =========================================
+   BUTTON HOVER AND CLICK MOVEMENT
+========================================= */
+
+button:not(:disabled) {
+  transition:
+    transform 0.18s ease,
+    box-shadow 0.18s ease,
+    background-color 0.18s ease,
+    border-color 0.18s ease;
+}
+
+button:not(:disabled):hover {
+  transform: translateY(-2px);
+}
+
+button:not(:disabled):active {
+  transform: translateY(1px) scale(0.98);
+}
+
+.primary-button:not(:disabled):hover,
+.login-button:not(:disabled):hover {
+  box-shadow: 0 5px 13px rgba(23, 59, 112, 0.18);
+}
+
+.nav-link:not(:disabled):active {
+  transform: scale(0.97);
+}
+
+.action-card:not(:disabled):hover {
+  transform: translateY(-4px);
+}
+
+.action-card:not(:disabled):active {
+  transform: scale(0.98);
+}
+
+/* Smooth page content appearance */
+.dashboard-content {
+  animation: pageAppear 0.3s ease;
+}
+
+@keyframes pageAppear {
+  from {
+    opacity: 0;
+    transform: translateY(7px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* =========================================
+   RESPONSIVE PROFILE AND ANALYTICS
+========================================= */
+
+@media (max-width: 1000px) {
+  .analytics-summary-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 600px) {
+  .profile-card {
+    padding: 17px;
+  }
+
+  .profile-header {
+    align-items: flex-start;
+  }
+
+  .profile-details {
+    grid-template-columns: 1fr;
+  }
+
+  .profile-form-section {
+    padding: 16px;
+  }
+
+  .analytics-summary-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+
+  .analytics-card {
+    padding: 16px;
+  }
+
+  .analytics-card h2 {
+    font-size: 19px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
   }
 }
