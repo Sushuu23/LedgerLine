@@ -2,7 +2,7 @@ import { useState } from "react";
 import { QRCodeSVG } from "qrcode.react";
 import "./App.css";
 
-const API = "http://localhost:8080";
+const API_URL = "https://ledgerline-0w0d.onrender.com";
 
 function App() {
   const [email, setEmail] = useState("");
