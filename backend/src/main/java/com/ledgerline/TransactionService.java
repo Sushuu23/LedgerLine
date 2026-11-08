@@ -12,13 +12,16 @@ public class TransactionService {
 
     private final AccountRepository accountRepository;
     private final TransactionRepository transactionRepository;
+    private final LedgerEntryService ledgerEntryService;
 
     public TransactionService(
             AccountRepository accountRepository,
-            TransactionRepository transactionRepository) {
+            TransactionRepository transactionRepository,
+            LedgerEntryService ledgerEntryService) {
 
         this.accountRepository = accountRepository;
         this.transactionRepository = transactionRepository;
+        this.ledgerEntryService = ledgerEntryService;
     }
 
     // DEPOSIT
@@ -45,7 +48,13 @@ public class TransactionService {
         transaction.setAmount(amount);
         transaction.setType(TransactionType.DEPOSIT);
 
-        return transactionRepository.save(transaction);
+        Transaction savedTransaction =
+                transactionRepository.save(transaction);
+
+        ledgerEntryService.recordDeposit(
+                savedTransaction, account, amount);
+
+        return savedTransaction;
     }
 
     // WITHDRAWAL
@@ -77,7 +86,13 @@ public class TransactionService {
         transaction.setAmount(amount);
         transaction.setType(TransactionType.WITHDRAWAL);
 
-        return transactionRepository.save(transaction);
+        Transaction savedTransaction =
+                transactionRepository.save(transaction);
+
+        ledgerEntryService.recordWithdrawal(
+                savedTransaction, account, amount);
+
+        return savedTransaction;
     }
 
     // TRANSFER
@@ -133,15 +148,21 @@ public class TransactionService {
         outgoing.setAccount(fromAccount);
         outgoing.setAmount(amount);
         outgoing.setType(TransactionType.TRANSFER);
-        transactionRepository.save(outgoing);
+
+        Transaction savedOutgoing =
+                transactionRepository.save(outgoing);
 
         Transaction incoming = new Transaction();
         incoming.setAccount(toAccount);
         incoming.setAmount(amount);
         incoming.setType(TransactionType.TRANSFER);
+
         transactionRepository.save(incoming);
 
-        return outgoing;
+        ledgerEntryService.recordTransfer(
+                savedOutgoing, fromAccount, toAccount, amount);
+
+        return savedOutgoing;
     }
 
     // TRANSACTION HISTORY
