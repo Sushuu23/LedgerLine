@@ -65,8 +65,12 @@ public class SecurityConfig {
 
         CorsConfiguration config = new CorsConfiguration();
 
+        // Allow local development and deployed Vercel frontend
         config.setAllowedOrigins(
-            List.of("http://localhost:5173")
+            List.of(
+                "http://localhost:5173",
+                "https://ledger-line-seven.vercel.app"
+            )
         );
 
         config.setAllowedMethods(
