@@ -6,6 +6,8 @@ const API = "https://ledgerline-0w0d.onrender.com";
 
 function App() {
   const [email, setEmail] = useState("");
+  const [fullName, setFullName] = useState("");
+  const [isRegistering, setIsRegistering] = useState(false);
   const [password, setPassword] = useState("");
   const [authHeader, setAuthHeader] = useState("");
   const [loggedIn, setLoggedIn] = useState(false);
@@ -67,6 +69,49 @@ function App() {
       setLoading(false);
     }
   };
+  // REGISTER USER
+const handleRegister = async (e) => {
+    e.preventDefault();
+
+    if (password.length < 8) {
+        setMessage("Password must contain at least 8 characters.");
+        return;
+    }
+
+    try {
+        setLoading(true);
+        setMessage("");
+
+        const response = await fetch(`${API}/api/auth/register`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                fullName: fullName.trim(),
+                email: email.trim(),
+                password: password
+            })
+        });
+
+        const data = await response.json();
+
+        if (!response.ok) {
+            setMessage(data.message || "Registration failed.");
+            return;
+        }
+
+        setMessage("Registration successful! Please sign in.");
+        setIsRegistering(false);
+        setFullName("");
+        setPassword("");
+
+    } catch (error) {
+        setMessage("Cannot connect to backend.");
+    } finally {
+        setLoading(false);
+    }
+};
 
   // LOAD ACCOUNTS
   const loadAccounts = async (header = authHeader) => {
@@ -459,60 +504,101 @@ function App() {
             Secure money movement. Proven by ledger.
           </p>
 
-          <h2>Sign in to your account</h2>
+         
+<h2>{isRegistering ? "Create your account" : "Sign in to your account"}</h2>
 
-          <p className="subtitle">
-            Enter your registered credentials to continue.
-          </p>
+<p className="subtitle">
+  {isRegistering
+    ? "Enter your details to create your LedgerLine account."
+    : "Enter your registered credentials to continue."}
+</p>
 
-          <form onSubmit={handleLogin}>
-            <label htmlFor="email">Email Address</label>
-            <input
-              id="email"
-              type="email"
-              placeholder="Enter your email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              required
-            />
+<form onSubmit={isRegistering ? handleRegister : handleLogin}>
 
-            <label htmlFor="password">Password</label>
+  {isRegistering && (
+    <>
+      <label htmlFor="fullName">Full Name</label>
+      <input
+        id="fullName"
+        type="text"
+        placeholder="Enter your full name"
+        value={fullName}
+        onChange={(e) => setFullName(e.target.value)}
+        required
+      />
+    </>
+  )}
 
-            <div className="password-box">
-              <input
-                id="password"
-                type={showPassword ? "text" : "password"}
-                placeholder="Enter your password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                required
-              />
+  <label htmlFor="email">Email Address</label>
+  <input
+    id="email"
+    type="email"
+    placeholder="Enter your email"
+    value={email}
+    onChange={(e) => setEmail(e.target.value)}
+    required
+  />
 
-              <button
-                type="button"
-                className="show-password"
-                onClick={() => setShowPassword(!showPassword)}
-              >
-                {showPassword ? "Hide" : "Show"}
-              </button>
-            </div>
+  <label htmlFor="password">Password</label>
 
-            <button
-              type="submit"
-              className="login-button"
-              disabled={loading}
-            >
-              {loading ? "Signing in..." : "Sign In"}
-            </button>
-          </form>
+  <div className="password-box">
+    <input
+      id="password"
+      type={showPassword ? "text" : "password"}
+      placeholder="Enter your password"
+      value={password}
+      onChange={(e) => setPassword(e.target.value)}
+      required
+    />
 
-          {message && (
-            <p className="login-message">{message}</p>
-          )}
+    <button
+      type="button"
+      className="show-password"
+      onClick={() => setShowPassword(!showPassword)}
+    >
+      {showPassword ? "Hide" : "Show"}
+    </button>
+  </div>
 
-          <p className="security-note">
-            Protected by secure authentication
-          </p>
+  <button
+    type="submit"
+    className="login-button"
+    disabled={loading}
+  >
+    {loading
+      ? (isRegistering ? "Creating account..." : "Signing in...")
+      : (isRegistering ? "Create Account" : "Sign In")}
+  </button>
+
+</form>
+
+<p>
+  {isRegistering
+    ? "Already have an account?"
+    : "Don't have an account?"}
+
+  {" "}
+  <button
+    type="button"
+    onClick={() => {
+      setIsRegistering(!isRegistering);
+      setMessage("");
+      setPassword("");
+      setFullName("");
+    }}
+  >
+    {isRegistering ? "Sign In" : "Create Account"}
+  </button>
+</p>
+
+{message && (
+  <p className="login-message">{message}</p>
+)}
+
+<p className="security-note">
+  Protected by secure authentication
+</p>
+
         </div>
       </div>
     );
